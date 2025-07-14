@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="patient_sydorenko" model="hr.hospital.patient">
+        <field name="first_name">Сергій</field>
+        <field name="last_name">Сидоренко</field>
+        <field name="birth_date">1990-04-12</field>
+        <field name="personal_doctor_id" ref="doctor_petrenko"/>
+    </record>
+
+    <record id="patient_olena" model="hr.hospital.patient">
+        <field name="first_name">Олена</field>
+        <field name="last_name">Біла</field>
+        <field name="birth_date">1985-07-29</field>
+        <field name="personal_doctor_id" ref="doctor_karpenko"/>
+    </record>
+
+    <record id="patient_andrii" model="hr.hospital.patient">
+        <field name="first_name">Андрій</field>
+        <field name="last_name">Павленко</field>
+        <field name="birth_date">2001-11-03</field>
+        <field name="personal_doctor_id" ref="doctor_petrenko"/>
+    </record>
+</odoo>

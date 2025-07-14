@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="specialty_therapist" model="hr.hospital.specialty">
+        <field name="name">Терапевт</field>
+    </record>
+
+    <record id="specialty_surgeon" model="hr.hospital.specialty">
+        <field name="name">Хірург</field>
+    </record>
+
+    <record id="specialty_pediatrician" model="hr.hospital.specialty">
+        <field name="name">Педіатр</field>
+    </record>
+</odoo>
