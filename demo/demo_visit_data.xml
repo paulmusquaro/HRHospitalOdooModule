@@ -29,4 +29,13 @@
         <field name="status">done</field>
         <field name="notes">Повторний огляд.</field>
     </record>
+    <!-- Візит 4 -->
+    <record id="visit_koval_khmara" model="hr.hospital.visit" context="{'no_check_edit': True}">
+        <field name="patient_id" ref="hr_hospital.patient_koval"/>
+        <field name="doctor_id" ref="hr_hospital.doctor_karpenko"/>
+        <field name="planned_datetime">2025-06-04 09:00:00</field>
+        <field name="actual_datetime">2025-06-04 09:10:00</field>
+        <field name="status">cancelled</field>
+        <field name="notes">Огляд перед щепленням.</field>
+    </record>
 </odoo>

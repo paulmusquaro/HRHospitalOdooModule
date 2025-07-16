@@ -20,6 +20,12 @@ class HospitalVisit(models.Model):
     patient_id = fields.Many2one('hr.hospital.patient', string="Patient")
     diagnosis_ids = fields.One2many('hr.hospital.diagnosis', 'visit_id', string="Diagnoses")
     notes = fields.Text(string='Notes')
+    visit_count = fields.Integer(string="Visit Count", compute="_compute_count", store=True)
+
+    @api.depends()
+    def _compute_count(self):
+        for rec in self:
+            rec.visit_count = 1
 
     @api.constrains('actual_datetime', 'doctor_id', 'status')
     def _check_visit_constraints(self):

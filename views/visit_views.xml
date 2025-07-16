@@ -17,23 +17,87 @@
         <field name="name">hr.hospital.visit.form</field>
         <field name="model">hr.hospital.visit</field>
         <field name="arch" type="xml">
-            <form>
-                <group>
-                    <field name="patient_id"/>
-                    <field name="doctor_id"/>
-                    <field name="planned_datetime"/>
-                    <field name="actual_datetime"/>
-                    <field name="diagnosis_ids" widget="one2many_list"/>
-                    <field name="notes"/>
-                </group>
+            <form string="Patient Visit">
+                <header>
+                    <field name="status" widget="statusbar"
+                        statusbar_visible="planned,done,cancelled"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="patient_id"/>
+                        <field name="doctor_id"/>
+                        <field name="planned_datetime"/>
+                        <field name="actual_datetime"/>
+                        <field name="diagnosis_ids" widget="one2many_list"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="view_visit_calendar" model="ir.ui.view">
+        <field name="name">hr.hospital.visit.calendar</field>
+        <field name="model">hr.hospital.visit</field>
+        <field name="arch" type="xml">
+            <calendar string="Visit Calendar"
+                      date_start="planned_datetime"
+                      date_stop="actual_datetime"
+                      color="doctor_id">
+                <field name="patient_id"/>
+                <field name="status"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_visit_search" model="ir.ui.view">
+        <field name="name">hr.hospital.visit.search</field>
+        <field name="model">hr.hospital.visit</field>
+        <field name="arch" type="xml">
+            <search string="Search Visits">
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="status"/>
+                <field name="planned_datetime"/>
+
+                <filter string="This Month" name="this_month"
+                        domain="[
+                          ('planned_datetime', '&gt;=', (context_today().replace(day=1))),
+                          ('planned_datetime', '&lt;', (context_today() + relativedelta(months=1)).replace(day=1))]"/>
+
+                <group expand="1" string="Group By">
+                    <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_by_doctor" string="Doctor" context="{'group_by': 'doctor_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_visit_pivot" model="ir.ui.view">
+        <field name="name">hr.hospital.visit.pivot</field>
+        <field name="model">hr.hospital.visit</field>
+        <field name="arch" type="xml">
+            <pivot string="Visits Analysis"
+                   disable_linking="True">
+                <field name="doctor_id" type="row"/>
+                <field name="status" type="col"/>
+                <field name="visit_count" type="measure" operator="sum"/>
+            </pivot>
         </field>
     </record>
 
     <record id="action_visit" model="ir.actions.act_window">
         <field name="name">Visits</field>
         <field name="res_model">hr.hospital.visit</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,calendar,pivot</field>
+        <field name="search_view_id" ref="hr_hospital.view_visit_search"/>
+    </record>
+
+    <record id="hr_hospital.action_visit_quick_create" model="ir.actions.act_window">
+        <field name="name">New Visit</field>
+        <field name="res_model">hr.hospital.visit</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
     </record>
 
     <menuitem id="menu_visit_list" name="All Visits"

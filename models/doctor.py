@@ -11,6 +11,7 @@ class Doctor(models.Model):
     specialty_id = fields.Many2one('hr.hospital.specialty', string="Specialty")
     is_intern = fields.Boolean(string="Intern")
     mentor_id = fields.Many2one('hr.hospital.doctor', string="Mentor", domain="[('is_intern','=',False)]")
+    intern_ids = fields.One2many('hr.hospital.doctor', 'mentor_id', string="Interns")
 
     @api.depends('first_name', 'last_name')
     def _compute_name(self):

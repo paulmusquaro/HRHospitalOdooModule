@@ -10,12 +10,13 @@
     'license': 'OPL-1',
     'data': [
         'security/ir.model.access.csv',
+        'views/diagnosis_views.xml',
         'views/hr_hospital_menu.xml',
         'views/specialty_views.xml',
+        'views/visit_views.xml',
         'views/doctor_views.xml',
         'views/patient_views.xml',
         'views/disease_views.xml',
-        'views/visit_views.xml',
         'wizards/patient_doctor_update_wizard_view.xml',
         'wizards/diagnosis_report_wizard_view.xml',
     ],
@@ -25,5 +26,6 @@
         'demo/demo_patient_data.xml',
         'demo/demo_disease_data.xml',
         'demo/demo_visit_data.xml',
+        'demo/demo_diagnosis_data.xml',
     ],
 }

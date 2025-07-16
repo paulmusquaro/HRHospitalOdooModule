@@ -15,20 +15,122 @@
         <field name="name">hr.hospital.doctor.form</field>
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
-            <form>
-                <group>
-                    <field name="first_name"/>
-                    <field name="last_name"/>
-                    <field name="specialty_id"/>
-                </group>
+            <form string="Doctor">
+                <sheet>
+                    <group>
+                        <field name="first_name"/>
+                        <field name="last_name"/>
+                        <field name="specialty_id"/>
+                        <field name="is_intern"/>
+                        <field name="mentor_id"/>
+                    </group>
+
+                    <group string="Interns">
+                        <field name="intern_ids" modifiers="{'invisible': [('is_intern', '=', True)]}">
+                            <kanban>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_global_click o_kanban_record">
+                                            <strong><field name="first_name"/> <field name="last_name"/></strong><br/>
+                                            <span><field name="specialty_id"/></span>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </group>
+                </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="view_doctor_search" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.search</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="arch" type="xml">
+            <search string="Search Doctors">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="specialty_id"/>
+                <filter string="Mentors" name="filter_mentors" domain="[('is_intern', '=', False)]"/>
+                <filter string="Interns" name="filter_interns" domain="[('is_intern', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_doctor_kanban" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.kanban</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_example" default_group_by="specialty_id">
+                <field name="id"/>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="specialty_id"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="first_name"/> <field name="last_name"/>
+                                </strong><br/>
+                                <span>
+                                    <field name="specialty_id"/>
+                                </span>
+
+                                <div class="mt-2">
+                                    <button name="%(hr_hospital.action_visit_quick_create)d"
+                                            type="action"
+                                            context="{'default_doctor_id': id}"
+                                            class="btn btn-primary btn-sm">
+                                        Записати пацієнта
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Inherit doctor form view to add "Diagnosis Report" button -->
+    <record id="view_doctor_form_inherit_buttons" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.form.inherit.buttons</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="inherit_id" ref="hr_hospital.view_doctor_form"/> <!-- це ID твоєї базової форми -->
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group[last()]" position="after">
+                <button name="%(hr_hospital.action_diagnosis_report_wizard)d"
+                        type="action" string="Diagnosis Report"
+                        class="btn btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Дія для списку лікарів -->
+    <record id="action_diagnosis_report_from_list" model="ir.actions.server">
+        <field name="name">Open Diagnosis Report Wizard</field>
+        <field name="model_id" ref="hr_hospital.model_hr_hospital_doctor"/>
+        <field name="binding_model_id" ref="hr_hospital.model_hr_hospital_doctor"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                'type': 'ir.actions.act_window',
+                'res_model': 'hr.hospital.diagnosis.report.wizard',
+                'view_mode': 'form',
+                'target': 'new',
+            }
         </field>
     </record>
 
     <record id="action_doctor" model="ir.actions.act_window">
         <field name="name">Doctors</field>
         <field name="res_model">hr.hospital.doctor</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="hr_hospital.view_doctor_search"/>
     </record>
 
     <menuitem id="menu_doctor_list" name="All Doctors"

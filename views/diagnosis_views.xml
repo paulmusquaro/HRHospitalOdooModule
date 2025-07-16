@@ -1,0 +1,55 @@
+<odoo>
+    <record id="view_diagnosis_tree_for_report" model="ir.ui.view">
+        <field name="name">hr.hospital.diagnosis.tree.report</field>
+        <field name="model">hr.hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="disease_id"/>
+                <field name="doctor_id"/>
+                <field name="diagnosis_date"/>
+                <field name="approved"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_diagnosis_pivot" model="ir.ui.view">
+        <field name="name">hr.hospital.diagnosis.pivot</field>
+        <field name="model">hr.hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <pivot string="Diagnosis Analysis" disable_linking="1">
+                <field name="disease_id" type="row"/>
+                <field name="diagnosis_date" interval="month" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_diagnosis_graph" model="ir.ui.view">
+        <field name="name">hr.hospital.diagnosis.graph</field>
+        <field name="model">hr.hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <graph string="Diagnosis Graph" type="bar">
+                <field name="disease_id" type="row"/>
+                <field name="diagnosis_date" interval="month" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_diagnosis_search" model="ir.ui.view">
+        <field name="name">hr.hospital.diagnosis.search</field>
+        <field name="model">hr.hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <search string="Search Diagnoses">
+                <field name="disease_id"/>
+                <field name="doctor_id"/>
+                <field name="diagnosis_date"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_diagnosis" model="ir.actions.act_window">
+        <field name="name">Diagnoses</field>
+        <field name="res_model">hr.hospital.diagnosis</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="search_view_id" ref="hr_hospital.view_diagnosis_search"/>
+    </record>
+</odoo>

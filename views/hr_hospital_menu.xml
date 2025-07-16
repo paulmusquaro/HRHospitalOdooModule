@@ -6,5 +6,6 @@
     <menuitem id="hr_hospital_menu_specialty" name="Specialties" parent="hr_hospital_root_menu"/>
     <menuitem id="hr_hospital_menu_disease" name="Diseases" parent="hr_hospital_root_menu"/>
     <menuitem id="hr_hospital_menu_visit" name="Visits" parent="hr_hospital_root_menu"/>
+    <menuitem id="hr_hospital_menu_diagnosis" name="Diagnoses" parent="hr_hospital_root_menu" action="action_diagnosis"/>
 
 </odoo>

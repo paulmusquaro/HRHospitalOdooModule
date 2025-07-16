@@ -1,0 +1,49 @@
+<odoo>
+    <!-- Діагноз 1: Грип -->
+    <record id="diagnosis_1" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="hr_hospital.visit_sydorenko_petrenko"/>
+        <field name="disease_id" ref="hr_hospital.disease_flu"/>
+        <field name="description">Застосовано симптоматичне лікування.</field>
+        <field name="approved">1</field>
+    </record>
+
+    <!-- Діагноз 2: COVID-19 -->
+    <record id="diagnosis_2" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="hr_hospital.visit_sydorenko_petrenko"/>
+        <field name="disease_id" ref="hr_hospital.disease_covid"/>
+        <field name="description">Пацієнт у задовільному стані, без ускладнень.</field>
+        <field name="approved">1</field>
+    </record>
+
+    <!-- Діагноз 3: Гіпертонія -->
+    <record id="diagnosis_3" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="hr_hospital.visit_bila_karpenko"/>
+        <field name="disease_id" ref="hr_hospital.disease_hypertension"/>
+        <field name="description">Рекомендовано моніторинг тиску та дієта.</field>
+        <field name="approved">1</field>
+    </record>
+
+    <!-- Діагноз 4: Діабет -->
+    <record id="diagnosis_4" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="hr_hospital.visit_bila_karpenko"/>
+        <field name="disease_id" ref="hr_hospital.disease_diabetes"/>
+        <field name="description">Призначено інсулін короткої дії.</field>
+        <field name="approved">1</field>
+    </record>
+
+    <!-- Діагноз 5: Грип -->
+    <record id="diagnosis_5" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="hr_hospital.visit_pavlenko_petrenko"/>
+        <field name="disease_id" ref="hr_hospital.disease_flu"/>
+        <field name="description">Скарги на втому, без температури.</field>
+        <field name="approved">1</field>
+    </record>
+
+    <!-- Діагноз 6: COVID-19 -->
+    <record id="diagnosis_6" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="hr_hospital.visit_pavlenko_petrenko"/>
+        <field name="disease_id" ref="hr_hospital.disease_covid"/>
+        <field name="description">Легка форма, нагляд в домашніх умовах.</field>
+        <field name="approved">1</field>
+    </record>
+</odoo>

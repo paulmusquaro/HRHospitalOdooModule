@@ -21,12 +21,21 @@ class DiagnosisReportWizard(models.TransientModel):
         if self.date_to:
             domain += [('visit_id.actual_datetime', '<=', self.date_to)]
 
-        return self.env['hr.hospital.diagnosis'].search(domain)
-        # return {
-        #     'type': 'ir.actions.act_window',
-        #     'name': 'Diagnosis Results',
-        #     'res_model': 'hr.hospital.diagnosis',
-        #     'view_mode': 'tree,form',
-        #     'domain': domain,
-        #     'target': 'current',
-        # }
+        # return self.env['hr.hospital.diagnosis'].search(domain)
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Filtered Diagnoses',
+            'res_model': 'hr.hospital.diagnosis',
+            'view_mode': 'tree,form,pivot,graph',
+            'views': [
+                (self.env.ref('hr_hospital.view_diagnosis_tree_for_report').id, 'tree'),
+                (False, 'form'),
+                (False, 'pivot'),
+                (False, 'graph'),
+            ],
+            'domain': domain,
+            'context': {
+                'group_by': 'disease_id',
+            },
+            'target': 'current',
+        }
