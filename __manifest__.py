@@ -1,7 +1,7 @@
 {
     'name': 'HR Hospital',
     'version': '17.0.1.0.0',
-    'depends': ['base'],
+    'depends': ['base', 'web'],
     'author': 'Paul',
     'category': 'Human Resources',
     'installable': True,
@@ -10,6 +10,9 @@
     'license': 'OPL-1',
     'data': [
         'security/ir.model.access.csv',
+        'report/report_doctor.xml',
+        'report/report_doctor_template.xml',
+
         'views/diagnosis_views.xml',
         'views/hr_hospital_menu.xml',
         'views/specialty_views.xml',
@@ -17,6 +20,7 @@
         'views/doctor_views.xml',
         'views/patient_views.xml',
         'views/disease_views.xml',
+
         'wizards/patient_doctor_update_wizard_view.xml',
         'wizards/diagnosis_report_wizard_view.xml',
     ],

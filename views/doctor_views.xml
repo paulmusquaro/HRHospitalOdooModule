@@ -16,6 +16,12 @@
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <form string="Doctor">
+                <header>
+                    <button name="%(hr_hospital.action_doctor_report)d"
+                            string="Друк звіту"
+                            type="action"
+                            class="btn btn-secondary"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="first_name"/>
