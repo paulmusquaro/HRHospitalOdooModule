@@ -68,31 +68,68 @@
         <field name="name">hr.hospital.doctor.kanban</field>
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
-            <kanban class="o_kanban_example" default_group_by="specialty_id">
+            <kanban default_group_by="specialty_id" class="o_hospital_doctor_kanban">
                 <field name="id"/>
                 <field name="first_name"/>
                 <field name="last_name"/>
                 <field name="specialty_id"/>
+                <field name="intern_ids"/>
+                <field name="is_intern"/>
+                <field name="interns_names"/>
 
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click o_kanban_record">
-                            <div class="oe_kanban_details">
-                                <strong>
-                                    <field name="first_name"/> <field name="last_name"/>
-                                </strong><br/>
-                                <span>
-                                    <field name="specialty_id"/>
-                                </span>
+                        <div class="oe_kanban_global_click o_kanban_record p-1 position-relative">
 
-                                <div class="mt-2">
-                                    <button name="%(hr_hospital.action_visit_quick_create)d"
-                                            type="action"
-                                            context="{'default_doctor_id': id}"
-                                            class="btn btn-primary btn-sm">
-                                        Записати пацієнта
-                                    </button>
+                            <div class="o_kanban_manage_dropdown">
+                                <a class="o_dropdown_toggler btn btn-sm"
+                                   data-bs-toggle="dropdown" role="button"
+                                   aria-label="Actions">
+                                    <i class="fa fa-bars"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu">
+                                    <a type="edit"
+                                       class="dropdown-item oe_kanban_action oe_kanban_action_a">
+                                        <i class="fa fa-pencil me-1"/> Edit
+                                    </a>
+<!--                                    <a type="copy"-->
+<!--                                       class="dropdown-item oe_kanban_action oe_kanban_action_a">-->
+<!--                                        <i class="fa fa-copy me-1"/> Duplicate-->
+<!--                                    </a>-->
+                                    <a type="delete"
+                                       class="dropdown-item oe_kanban_action oe_kanban_action_a">
+                                        <i class="fa fa-trash me-1"/> Delete
+                                    </a>
                                 </div>
+                            </div>
+
+                            <strong>
+                                <field name="first_name"/> <field name="last_name"/>
+                            </strong><br/>
+                            <small class="text-muted">
+                                <field name="specialty_id"/>
+                            </small>
+<!--&amp;&amp; ! record.is_intern.raw_value-->
+                            <t t-if="record.interns_names.raw_value &amp;&amp; ! record.is_intern.raw_value">
+                                <hr class="mt-1 mb-1"/>
+                                <ul class="list-unstyled mb-0">
+                                    <!-- розбиваємо рядок на список, обрізаємо пробіли -->
+                                    <t t-foreach="record.interns_names.raw_value.split(',')" t-as="intern_name">
+                                        <li>
+                                            <i class="fa fa-user text-secondary me-1"></i>
+                                            <t t-esc="intern_name.trim()"/>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </t>
+
+                            <div class="o_kanban_buttons mt-2">
+                                <button type="action"
+                                        name="%(hr_hospital.action_visit_quick_create)d"
+                                        context="{'default_doctor_id': id}"
+                                        class="btn btn-primary btn-sm">
+                                    Записати пацієнта
+                                </button>
                             </div>
                         </div>
                     </t>
