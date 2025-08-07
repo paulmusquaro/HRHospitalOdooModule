@@ -1,0 +1,53 @@
+<odoo>
+    <data noupdate="0">
+        <record id="rule_patient_visit_own" model="ir.rule">
+            <field name="name">Patient – own visits</field>
+            <field name="model_id" ref="model_hr_hospital_visit"/>
+            <field name="groups" eval="[(4, ref('hr_hospital.group_patient'))]"/>
+            <field name="domain_force">[('patient_id.user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <record id="rule_intern_visit_own" model="ir.rule">
+            <field name="name">Intern – own visits</field>
+            <field name="model_id" ref="model_hr_hospital_visit"/>
+            <field name="groups" eval="[(4, ref('hr_hospital.group_intern'))]"/>
+            <field name="domain_force">[('doctor_id.user_id', '=', user.id)]</field>
+            <field name="perm_read"  eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+        <record id="rule_doctor_visit_scope" model="ir.rule">
+            <field name="name">Doctor – own and interns visits</field>
+            <field name="model_id" ref="model_hr_hospital_visit"/>
+            <field name="groups" eval="[(4, ref('hr_hospital.group_doctor'))]"/>
+            <field name="domain_force">
+                ['|', ('doctor_id.user_id', '=', user.id),
+                      ('doctor_id.mentor_id.user_id', '=', user.id)]
+            </field>
+            <field name="perm_read"  eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+        <record id="rule_manager_visit_readall" model="ir.rule">
+            <field name="name">Manager – read all visits</field>
+            <field name="model_id" ref="model_hr_hospital_visit"/>
+            <field name="groups" eval="[(4, ref('hr_hospital.group_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <record id="rule_admin_visit_all" model="ir.rule">
+            <field name="name">Hospital admin – full access</field>
+            <field name="model_id" ref="model_hr_hospital_visit"/>
+            <field name="groups" eval="[(4, ref('hr_hospital.group_admin'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read"   eval="True"/>
+            <field name="perm_write"  eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+    </data>
+</odoo>

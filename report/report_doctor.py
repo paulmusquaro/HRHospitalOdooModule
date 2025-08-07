@@ -2,11 +2,29 @@ from odoo import models
 from datetime import datetime
 
 class ReportDoctorTemplate(models.AbstractModel):
-    _name = 'report.hr_hospital.report_doctor_template'  # важливо: має співпадати з report_name у XML
+    """
+    Abstract model for generating doctor reports.
+
+    This report aggregates doctor data and retrieves the latest visit
+    per patient associated with the doctor. It is rendered via QWeb
+    using the XML template `report_hr_hospital.report_doctor_template`.
+
+    The model name must match the template's `report_xxx` declaration.
+    """
+    _name = 'report.hr_hospital.report_doctor_template'
     _description = 'Doctor Report'
 
     def _get_report_values(self, docids, data=None):
-        print("⚠️ _get_report_values called!")  # DEBUG
+        """
+        Provide the data dictionary required by the QWeb report rendering engine.
+
+        Args:
+            docids (list): List of doctor record IDs to include in the report.
+            data (dict): Additional data passed to the report (unused).
+
+        Returns:
+            dict: A dictionary with context values for rendering the report template.
+        """
         docs = self.env['hr.hospital.doctor'].browse(docids)
         latest_visits = {}
         for doctor in docs:

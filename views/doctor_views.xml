@@ -18,7 +18,7 @@
             <form string="Doctor">
                 <header>
                     <button name="%(hr_hospital.action_doctor_report)d"
-                            string="Друк звіту"
+                            string="Print report"
                             type="action"
                             class="btn btn-secondary"/>
                 </header>
@@ -92,10 +92,6 @@
                                        class="dropdown-item oe_kanban_action oe_kanban_action_a">
                                         <i class="fa fa-pencil me-1"/> Edit
                                     </a>
-<!--                                    <a type="copy"-->
-<!--                                       class="dropdown-item oe_kanban_action oe_kanban_action_a">-->
-<!--                                        <i class="fa fa-copy me-1"/> Duplicate-->
-<!--                                    </a>-->
                                     <a type="delete"
                                        class="dropdown-item oe_kanban_action oe_kanban_action_a">
                                         <i class="fa fa-trash me-1"/> Delete
@@ -109,11 +105,10 @@
                             <small class="text-muted">
                                 <field name="specialty_id"/>
                             </small>
-<!--&amp;&amp; ! record.is_intern.raw_value-->
+
                             <t t-if="record.interns_names.raw_value &amp;&amp; ! record.is_intern.raw_value">
                                 <hr class="mt-1 mb-1"/>
                                 <ul class="list-unstyled mb-0">
-                                    <!-- розбиваємо рядок на список, обрізаємо пробіли -->
                                     <t t-foreach="record.interns_names.raw_value.split(',')" t-as="intern_name">
                                         <li>
                                             <i class="fa fa-user text-secondary me-1"></i>
@@ -128,7 +123,7 @@
                                         name="%(hr_hospital.action_visit_quick_create)d"
                                         context="{'default_doctor_id': id}"
                                         class="btn btn-primary btn-sm">
-                                    Записати пацієнта
+                                    Record a patient
                                 </button>
                             </div>
                         </div>
@@ -142,7 +137,7 @@
     <record id="view_doctor_form_inherit_buttons" model="ir.ui.view">
         <field name="name">hr.hospital.doctor.form.inherit.buttons</field>
         <field name="model">hr.hospital.doctor</field>
-        <field name="inherit_id" ref="hr_hospital.view_doctor_form"/> <!-- це ID твоєї базової форми -->
+        <field name="inherit_id" ref="hr_hospital.view_doctor_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet/group[last()]" position="after">
                 <button name="%(hr_hospital.action_diagnosis_report_wizard)d"
@@ -152,7 +147,6 @@
         </field>
     </record>
 
-    <!-- Дія для списку лікарів -->
     <record id="action_diagnosis_report_from_list" model="ir.actions.server">
         <field name="name">Open Diagnosis Report Wizard</field>
         <field name="model_id" ref="hr_hospital.model_hr_hospital_doctor"/>

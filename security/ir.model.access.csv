@@ -1,9 +1,49 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_hospital_specialty,access_hr_hospital_specialty,model_hr_hospital_specialty,base.group_user,1,1,1,1
-access_doctor_user,access_doctor_user,model_hr_hospital_doctor,base.group_user,1,1,1,1
-access_patient_user,access_patient_user,model_hr_hospital_patient,base.group_user,1,1,1,1
-access_disease_user,access_disease_user,model_hr_hospital_disease,base.group_user,1,1,1,1
-access_visit_user,access_visit_user,model_hr_hospital_visit,base.group_user,1,1,1,1
-access_diagnosis_user,access_diagnosis_user,model_hr_hospital_diagnosis,base.group_user,1,1,1,1
-access_patient_doctor_update_wizard,access_patient_doctor_update_wizard,model_hr_hospital_patient_doctor_wizard,base.group_user,1,1,1,0
-access_diagnosis_report_wizard,access_diagnosis_report_wizard,model_hr_hospital_diagnosis_report_wizard,base.group_user,1,0,1,0
+
+access_read_specialty_user,Specialty / Read all,model_hr_hospital_specialty,base.group_user,1,0,0,0
+access_read_disease_user,Disease / Read all,model_hr_hospital_disease,base.group_user,1,0,0,0
+access_read_patient_user,Patient / Read all,model_hr_hospital_patient,base.group_user,1,0,0,0
+access_read_doctor_user,Doctor / Read all,model_hr_hospital_doctor,base.group_user,1,0,0,0
+access_read_visit_user,Visit / Read all,model_hr_hospital_visit,base.group_user,1,0,0,0
+access_read_diagnosis_user,Diagnosis / Read all,model_hr_hospital_diagnosis,base.group_user,1,0,0,0
+
+access_specialty_patient,Specialty / Patient,model_hr_hospital_specialty,hr_hospital.group_patient,1,0,0,0
+access_specialty_intern,Specialty / Intern,model_hr_hospital_specialty,hr_hospital.group_intern,1,0,0,0
+access_specialty_doctor,Specialty / Doctor,model_hr_hospital_specialty,hr_hospital.group_doctor,1,1,1,0
+access_specialty_manager,Specialty / Manager,model_hr_hospital_specialty,hr_hospital.group_manager,1,0,0,0
+access_specialty_admin,Specialty / Admin,model_hr_hospital_specialty,hr_hospital.group_admin,1,1,1,1
+
+access_disease_patient,Disease / Patient,model_hr_hospital_disease,hr_hospital.group_patient,1,0,0,0
+access_disease_intern,Disease / Intern,model_hr_hospital_disease,hr_hospital.group_intern,1,0,0,0
+access_disease_doctor,Disease / Doctor,model_hr_hospital_disease,hr_hospital.group_doctor,1,1,1,0
+access_disease_manager,Disease / Manager,model_hr_hospital_disease,hr_hospital.group_manager,1,0,0,0
+access_disease_admin,Disease / Admin,model_hr_hospital_disease,hr_hospital.group_admin,1,1,1,1
+
+access_patient_patient,Patient / Patient,model_hr_hospital_patient,hr_hospital.group_patient,1,0,0,0
+access_patient_intern,Patient / Intern,model_hr_hospital_patient,hr_hospital.group_intern,1,0,0,0
+access_patient_doctor,Patient / Doctor,model_hr_hospital_patient,hr_hospital.group_doctor,1,1,1,0
+access_patient_manager,Patient / Manager,model_hr_hospital_patient,hr_hospital.group_manager,1,0,0,0
+access_patient_admin,Patient / Admin,model_hr_hospital_patient,hr_hospital.group_admin,1,1,1,1
+
+access_doctor_patient,Doctor / Patient,model_hr_hospital_doctor,hr_hospital.group_patient,0,0,0,0
+access_doctor_intern,Doctor / Intern,model_hr_hospital_doctor,hr_hospital.group_intern,1,0,0,0
+access_doctor_doctor,Doctor / Doctor,model_hr_hospital_doctor,hr_hospital.group_doctor,1,1,1,0
+access_doctor_manager,Doctor / Manager,model_hr_hospital_doctor,hr_hospital.group_manager,1,0,0,0
+access_doctor_admin,Doctor / Admin,model_hr_hospital_doctor,hr_hospital.group_admin,1,1,1,1
+
+access_visit_patient,Visit / Patient,model_hr_hospital_visit,hr_hospital.group_patient,1,0,0,0
+access_visit_intern,Visit / Intern,model_hr_hospital_visit,hr_hospital.group_intern,1,1,1,0
+access_visit_doctor,Visit / Doctor,model_hr_hospital_visit,hr_hospital.group_doctor,1,1,1,0
+access_visit_manager,Visit / Manager,model_hr_hospital_visit,hr_hospital.group_manager,1,0,0,0
+access_visit_admin,Visit / Admin,model_hr_hospital_visit,hr_hospital.group_admin,1,1,1,1
+
+access_diagnosis_patient,Diagnosis / Patient,model_hr_hospital_diagnosis,hr_hospital.group_patient,1,0,0,0
+access_diagnosis_intern,Diagnosis / Intern,model_hr_hospital_diagnosis,hr_hospital.group_intern,1,1,1,0
+access_diagnosis_doctor,Diagnosis / Doctor,model_hr_hospital_diagnosis,hr_hospital.group_doctor,1,1,1,0
+access_diagnosis_manager,Diagnosis / Manager,model_hr_hospital_diagnosis,hr_hospital.group_manager,1,0,0,0
+access_diagnosis_admin,Diagnosis / Admin,model_hr_hospital_diagnosis,hr_hospital.group_admin,1,1,1,1
+
+access_patient_doctor_update_wizard,Wizard Patient→Doctor,model_hr_hospital_patient_doctor_wizard,hr_hospital.group_doctor,1,1,1,0
+access_patient_doctor_update_wizard_admin,Wizard Patient→Doctor / Admin,model_hr_hospital_patient_doctor_wizard,hr_hospital.group_admin,1,1,1,1
+access_diagnosis_report_wizard,Wizard Diagnosis Report,model_hr_hospital_diagnosis_report_wizard,hr_hospital.group_doctor,1,1,1,0
+access_diagnosis_report_wizard_admin,Wizard Diagnosis Report / Admin,model_hr_hospital_diagnosis_report_wizard,hr_hospital.group_admin,1,1,1,1

@@ -2,6 +2,17 @@ from odoo import fields, models
 
 
 class DiagnosisReportWizard(models.TransientModel):
+    """
+    A wizard model for generating filtered diagnosis reports.
+
+    This wizard allows users to filter diagnosis records based on:
+    - Selected doctors
+    - Selected diseases
+    - Visit date range (from / to)
+
+    It is used to quickly analyze diagnoses via various views:
+    tree, form, pivot, graph.
+    """
     _name = 'hr.hospital.diagnosis.report.wizard'
     _description = 'Diagnosis Report Wizard'
 
@@ -11,6 +22,17 @@ class DiagnosisReportWizard(models.TransientModel):
     date_to = fields.Date()
 
     def get_diagnosis_records(self):
+        """
+        Returns an action that opens a view with filtered diagnosis records
+        based on the criteria provided in the wizard.
+
+        Filters applied:
+        - Doctor(s)
+        - Disease(s)
+        - Visit actual date between `date_from` and `date_to`
+
+        :return: dict representing an ir.actions.act_window action
+        """
         domain = []
         if self.doctor_ids:
             domain += [('visit_id.doctor_id', 'in', self.doctor_ids.ids)]
@@ -21,7 +43,6 @@ class DiagnosisReportWizard(models.TransientModel):
         if self.date_to:
             domain += [('visit_id.actual_datetime', '<=', self.date_to)]
 
-        # return self.env['hr.hospital.diagnosis'].search(domain)
         return {
             'type': 'ir.actions.act_window',
             'name': 'Filtered Diagnoses',

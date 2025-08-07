@@ -1,22 +1,22 @@
 <odoo>
     <record id="doctor_ivanov" model="hr.hospital.doctor">
-        <field name="first_name">Іван</field>
-        <field name="last_name">Іванов</field>
+        <field name="first_name">Ivan</field>
+        <field name="last_name">Ivanov</field>
         <field name="is_intern">0</field>
         <field name="specialty_id" ref="specialty_therapist"/>
     </record>
 
     <record id="doctor_petrenko" model="hr.hospital.doctor">
-        <field name="first_name">Петро</field>
-        <field name="last_name">Петренко</field>
+        <field name="first_name">Petro</field>
+        <field name="last_name">Petrenko</field>
         <field name="is_intern">1</field>
         <field name="mentor_id" ref="doctor_ivanov"/>
         <field name="specialty_id" ref="specialty_surgeon"/>
     </record>
 
     <record id="doctor_karpenko" model="hr.hospital.doctor">
-        <field name="first_name">Катерина</field>
-        <field name="last_name">Карпенко</field>
+        <field name="first_name">Kateryna</field>
+        <field name="last_name">Karpenko</field>
         <field name="is_intern">1</field>
         <field name="mentor_id" ref="doctor_ivanov"/>
         <field name="specialty_id" ref="specialty_pediatrician"/>

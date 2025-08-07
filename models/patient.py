@@ -2,6 +2,15 @@ from odoo import models, fields, api
 from datetime import date
 
 class Patient(models.Model):
+    """
+    Represents a hospital patient.
+
+    Patients are individuals who receive care and attend visits.
+    This model stores personal details, birth date, emergency contact,
+    and provides computed fields like full name and age.
+
+    Inherits from hr.hospital.person to reuse personal details (first name, last name, phone, etc.).
+    """
     _name = 'hr.hospital.patient'
     _inherit = 'hr.hospital.person'
     _description = 'Patient'
@@ -24,6 +33,12 @@ class Patient(models.Model):
 
     @api.depends()
     def _compute_diagnosis_ids(self):
+        """
+        Compute and assign all diagnoses related to the patient.
+
+        The relation is indirect: through hr.hospital.visit
+        and linked diagnosis records where patient_id is involved.
+        """
         for patient in self:
             diagnoses = self.env['hr.hospital.diagnosis'].search([
                 ('visit_id.patient_id', '=', patient.id)
@@ -32,6 +47,11 @@ class Patient(models.Model):
 
     @api.depends('birth_date')
     def _compute_age(self):
+        """
+        Compute patient's age based on their birth date.
+
+        If birth date is not set, age will be zero.
+        """
         for rec in self:
             if rec.birth_date:
                 today = date.today()
@@ -43,10 +63,19 @@ class Patient(models.Model):
 
     @api.depends('first_name', 'last_name')
     def _compute_name(self):
+        """
+        Compute full name of the patient using first and last name.
+        """
         for rec in self:
             rec.name = f"{rec.first_name or ''} {rec.last_name or ''}".strip()
 
     def action_open_visits(self):
+        """
+        Open a list view of all visits for this patient.
+
+        Returns:
+            dict: An ir.actions.act_window to display visits in list and form view.
+        """
         self.ensure_one()
         return {
             'name': 'Patient Visits',
@@ -58,6 +87,12 @@ class Patient(models.Model):
         }
 
     def action_create_visit(self):
+        """
+        Open a form to create a new visit for the patient.
+
+        Returns:
+            dict: An ir.actions.act_window to open the new visit form with patient pre-filled.
+        """
         self.ensure_one()
         return {
             'name': 'New Visit',

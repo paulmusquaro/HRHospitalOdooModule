@@ -1,5 +1,4 @@
 <odoo>
-    <!-- Tree view -->
     <record id="view_specialty_tree" model="ir.ui.view">
         <field name="name">hr.hospital.specialty.tree</field>
         <field name="model">hr.hospital.specialty</field>
@@ -10,7 +9,6 @@
         </field>
     </record>
 
-    <!-- Form view -->
     <record id="view_specialty_form" model="ir.ui.view">
         <field name="name">hr.hospital.specialty.form</field>
         <field name="model">hr.hospital.specialty</field>
@@ -23,14 +21,12 @@
         </field>
     </record>
 
-    <!-- Action -->
     <record id="action_specialty" model="ir.actions.act_window">
         <field name="name">Specialties</field>
         <field name="res_model">hr.hospital.specialty</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Menu item -->
     <menuitem id="menu_specialty_list"
               name="All Specialties"
               parent="hr_hospital_menu_specialty"

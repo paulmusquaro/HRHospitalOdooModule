@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <record id="specialty_therapist" model="hr.hospital.specialty">
-        <field name="name">Терапевт</field>
+        <field name="name">Therapist</field>
     </record>
 
     <record id="specialty_surgeon" model="hr.hospital.specialty">
-        <field name="name">Хірург</field>
+        <field name="name">Surgeon</field>
     </record>
 
     <record id="specialty_pediatrician" model="hr.hospital.specialty">
-        <field name="name">Педіатр</field>
+        <field name="name">Pediatrician</field>
+    </record>
+
+    <record id="demo_specialty_cardiology" model="hr.hospital.specialty">
+        <field name="name">Cardiology</field>
+    </record>
+
+    <record id="demo_specialty_management" model="hr.hospital.specialty">
+        <field name="name">Hospital Management</field>
     </record>
 </odoo>

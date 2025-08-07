@@ -1,49 +1,49 @@
 <odoo>
-    <!-- Діагноз 1: Грип -->
+    <!-- Diagnosis 1: Flu -->
     <record id="diagnosis_1" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="hr_hospital.visit_sydorenko_petrenko"/>
         <field name="disease_id" ref="hr_hospital.disease_flu"/>
-        <field name="description">Застосовано симптоматичне лікування.</field>
+        <field name="description">Symptomatic treatment was applied.</field>
         <field name="approved">1</field>
     </record>
 
-    <!-- Діагноз 2: COVID-19 -->
+    <!-- Diagnosis 2: COVID-19 -->
     <record id="diagnosis_2" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="hr_hospital.visit_sydorenko_petrenko"/>
         <field name="disease_id" ref="hr_hospital.disease_covid"/>
-        <field name="description">Пацієнт у задовільному стані, без ускладнень.</field>
+        <field name="description">The patient is in satisfactory condition, without complications.</field>
         <field name="approved">1</field>
     </record>
 
-    <!-- Діагноз 3: Гіпертонія -->
+    <!-- Diagnosis 3: Hypertension -->
     <record id="diagnosis_3" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="hr_hospital.visit_bila_karpenko"/>
         <field name="disease_id" ref="hr_hospital.disease_hypertension"/>
-        <field name="description">Рекомендовано моніторинг тиску та дієта.</field>
+        <field name="description">Blood pressure monitoring and diet are recommended.</field>
         <field name="approved">1</field>
     </record>
 
-    <!-- Діагноз 4: Діабет -->
+    <!-- Diagnosis 4: Diabetes -->
     <record id="diagnosis_4" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="hr_hospital.visit_bila_karpenko"/>
         <field name="disease_id" ref="hr_hospital.disease_diabetes"/>
-        <field name="description">Призначено інсулін короткої дії.</field>
+        <field name="description">Short-acting insulin was prescribed.</field>
         <field name="approved">1</field>
     </record>
 
-    <!-- Діагноз 5: Грип -->
+    <!-- Diagnosis 5: Flu -->
     <record id="diagnosis_5" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="hr_hospital.visit_pavlenko_petrenko"/>
         <field name="disease_id" ref="hr_hospital.disease_flu"/>
-        <field name="description">Скарги на втому, без температури.</field>
+        <field name="description">Complaints of fatigue, without fever.</field>
         <field name="approved">1</field>
     </record>
 
-    <!-- Діагноз 6: COVID-19 -->
+    <!-- Diagnosis 6: COVID-19 -->
     <record id="diagnosis_6" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="hr_hospital.visit_pavlenko_petrenko"/>
         <field name="disease_id" ref="hr_hospital.disease_covid"/>
-        <field name="description">Легка форма, нагляд в домашніх умовах.</field>
+        <field name="description">Mild form, home care.</field>
         <field name="approved">1</field>
     </record>
 </odoo>

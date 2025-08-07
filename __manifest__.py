@@ -9,7 +9,10 @@
     'website': 'https://www.odoo.com',
     'license': 'OPL-1',
     'data': [
+        'security/hr_hospital_security.xml',
+        'security/hr_hospital_rules.xml',
         'security/ir.model.access.csv',
+
         'report/report_doctor.xml',
         'report/report_doctor_template.xml',
 
@@ -17,12 +20,14 @@
         'views/hr_hospital_menu.xml',
         'views/specialty_views.xml',
         'views/visit_views.xml',
+
+        'wizards/patient_doctor_update_wizard_view.xml',
+        'wizards/diagnosis_report_wizard_view.xml',
+
         'views/doctor_views.xml',
         'views/patient_views.xml',
         'views/disease_views.xml',
 
-        'wizards/patient_doctor_update_wizard_view.xml',
-        'wizards/diagnosis_report_wizard_view.xml',
     ],
     'demo': [
         'demo/demo_specialty_data.xml',
@@ -31,5 +36,6 @@
         'demo/demo_disease_data.xml',
         'demo/demo_visit_data.xml',
         'demo/demo_diagnosis_data.xml',
+        'demo/demo_users.xml',
     ],
 }

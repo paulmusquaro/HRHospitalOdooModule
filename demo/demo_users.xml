@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Demo accounts for hr_hospital module
+      Login / Password:  patient / demo
+      Login / Password:  intern  / demo
+      Login / Password:  doctor  / demo
+      Login / Password:  manager / demo
+      Login / Password:  h_admin / demo -->
+
+<!--These users were created more for testing access rights
+    and accordingly reflect the five user groups in this module.-->
+
+<odoo>
+    <data noupdate="1">
+
+        <record id="user_patient" model="res.users">
+            <field name="name">John Patient</field>
+            <field name="login">patient</field>
+            <field name="password">demo</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user')),
+                                           (4, ref('hr_hospital.group_patient'))]"/>
+        </record>
+
+        <record id="patient_demo" model="hr.hospital.patient">
+            <field name="first_name">John</field>
+            <field name="last_name">(‼️️Patient)</field>
+            <field name="birth_date">2001-11-03</field>
+            <field name="user_id" ref="user_patient"/>
+        </record>
+
+        <record id="user_doctor" model="res.users">
+            <field name="name">Dr Alice Mentor</field>
+            <field name="login">doctor</field>
+            <field name="password">demo</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user')),
+                                           (4, ref('hr_hospital.group_doctor'))]"/>
+        </record>
+
+        <record id="doctor_demo" model="hr.hospital.doctor">
+            <field name="first_name">Alice</field>
+            <field name="last_name">(‼️️Mentor)</field>
+            <field name="specialty_id" ref="hr_hospital.demo_specialty_cardiology"/>
+            <field name="user_id" ref="user_doctor"/>
+        </record>
+
+        <record id="user_intern" model="res.users">
+            <field name="name">Dr Bob Intern</field>
+            <field name="login">intern</field>
+            <field name="password">demo</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user')),
+                                           (4, ref('hr_hospital.group_intern'))]"/>
+        </record>
+
+        <record id="intern_demo" model="hr.hospital.doctor">
+            <field name="first_name">Bob</field>
+            <field name="last_name">(‼️️Intern)</field>
+            <field name="is_intern">True</field>
+            <field name="mentor_id" ref="doctor_demo"/>
+            <field name="specialty_id" ref="hr_hospital.demo_specialty_cardiology"/>
+            <field name="user_id" ref="user_intern"/>
+        </record>
+
+        <record id="user_manager" model="res.users">
+            <field name="name">Mary Manager</field>
+            <field name="login">manager</field>
+            <field name="password">demo</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user')),
+                                           (4, ref('hr_hospital.group_manager'))]"/>
+        </record>
+
+        <record id="manager_doctor_demo" model="hr.hospital.doctor">
+            <field name="first_name">Mary</field>
+            <field name="last_name">(‼️️Manager)</field>
+            <field name="specialty_id" ref="hr_hospital.demo_specialty_management"/>
+            <field name="user_id" ref="user_manager"/>
+        </record>
+
+        <record id="user_hospital_admin" model="res.users">
+            <field name="name">Henry Hospital Admin</field>
+            <field name="login">h_admin</field>
+            <field name="password">demo</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user')),
+                                           (4, ref('hr_hospital.group_admin'))]"/>
+        </record>
+
+        <record id="admin_doctor_demo" model="hr.hospital.doctor">
+            <field name="first_name">Henry</field>
+            <field name="last_name">(‼️️Admin)</field>
+            <field name="specialty_id" ref="hr_hospital.demo_specialty_management"/>
+            <field name="user_id" ref="user_hospital_admin"/>
+        </record>
+
+        <record id="patient_demo" model="hr.hospital.patient">
+            <field name="personal_doctor_id" ref="doctor_demo"/>
+        </record>
+
+    </data>
+</odoo>

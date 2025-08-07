@@ -4,6 +4,16 @@ from odoo import models, fields, api
 
 
 class HospitalVisit(models.Model):
+    """
+    Represents a scheduled or completed patient visit in the hospital.
+
+    Each visit is associated with a doctor and a patient and may include one or more diagnoses.
+    Visits can have different statuses (planned, done, or cancelled), and include fields for both
+    planned and actual visit times.
+
+    Business logic ensures visits cannot be modified once marked as done and prevents duplicates
+    for the same doctor-patient-date combination.
+    """
     _name = 'hr.hospital.visit'
     _description = 'Patient Visit'
 
@@ -24,11 +34,22 @@ class HospitalVisit(models.Model):
 
     @api.depends()
     def _compute_count(self):
+        """
+        Compute a fixed visit count for each record.
+
+        Currently, always sets count to 1. This is a placeholder for possible future logic.
+        """
         for rec in self:
             rec.visit_count = 1
 
     @api.constrains('actual_datetime', 'doctor_id', 'status')
     def _check_visit_constraints(self):
+        """
+        Prevent editing of visits that are marked as 'done'.
+
+        Raises:
+            ValidationError: if someone tries to modify a visit that is already marked as done.
+        """
         for rec in self:
             if rec.status == 'done':
                 if self.env.context.get('no_check_edit'):
@@ -37,6 +58,12 @@ class HospitalVisit(models.Model):
 
     @api.constrains('doctor_id', 'patient_id', 'planned_datetime')
     def _check_duplicate_visit(self):
+        """
+        Prevent scheduling multiple visits for the same doctor and patient on the same day.
+
+        Raises:
+            ValidationError: if a duplicate visit is found.
+        """
         for rec in self:
             same_day_start = rec.planned_datetime.date()
             visits = self.search([
@@ -50,6 +77,12 @@ class HospitalVisit(models.Model):
                 raise ValidationError("This patient is already scheduled with this doctor on this day.")
 
     def unlink(self):
+        """
+        Prevent deletion of visits that have diagnoses.
+
+        Raises:
+            ValidationError: if the visit has linked diagnosis records.
+        """
         for rec in self:
             if rec.diagnosis_ids:
                 raise ValidationError("You cannot delete visits with diagnoses.")

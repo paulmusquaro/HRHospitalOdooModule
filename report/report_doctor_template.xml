@@ -1,12 +1,10 @@
 <odoo>
   <template id="report_doctor_template">
-    <!-- Контейнер, який дає правильний DOCTYPE і <html>/<body> для pdf -->
     <t t-call="web.html_container">
-      <!-- Перебираємо лікарів -->
       <t t-foreach="docs" t-as="doc">
-        <!-- Для кожного лікаря малюємо окремий external_layout -->
         <t t-call="web.external_layout">
           <div class="page">
+
             <!-- Header -->
             <div class="text-center">
               <img t-if="company.logo"
@@ -18,14 +16,14 @@
             </div>
 
             <!-- Title -->
-            <h3 class="mt-4 mb-2">Звіт по лікарю</h3>
+            <h3 class="mt-4 mb-2">Doctor's report</h3>
             <h4><t t-esc="doc.name"/> — <t t-esc="doc.specialty_id.name"/></h4>
 
             <!-- Visit history -->
-            <h5 class="mt-4">Історія візитів (останні зверху)</h5>
+            <h5 class="mt-4">Visit history (recent ones at the top)</h5>
             <table class="table table-sm table-bordered">
               <thead>
-                <tr><th>Пацієнт</th><th>Статус</th><th>Дата</th></tr>
+                <tr><th>Patient</th><th>Status</th><th>Date</th></tr>
               </thead>
               <tbody>
                 <t t-foreach="
@@ -48,12 +46,12 @@
             </table>
 
             <!-- Patients -->
-            <h5 class="mt-4">Пацієнти лікаря</h5>
+            <h5 class="mt-4">Doctor's patients</h5>
             <table class="table table-sm table-bordered">
               <thead>
                 <tr>
-                  <th>ПІБ</th><th>Стать</th><th>Народження</th>
-                  <th>Телефон</th><th>Статус</th>
+                  <th>Full name</th><th>Sex</th><th>Birth</th>
+                  <th>Phone</th><th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -65,13 +63,13 @@
                     <td><t t-esc="visit.patient_id.phone"/></td>
                     <td>
                       <t t-if="visit.status == 'planned'">
-                        <span style="background:yellow;padding:3px;">Заплановано</span>
+                        <span style="background:yellow;padding:3px;">Scheduled</span>
                       </t>
                       <t t-elif="visit.status == 'done'">
-                        <span style="background:lightgreen;padding:3px;">Завершено</span>
+                        <span style="background:lightgreen;padding:3px;">Completed</span>
                       </t>
                       <t t-elif="visit.status == 'cancelled'">
-                        <span style="background:red;color:#fff;padding:3px;">Скасовано</span>
+                        <span style="background:red;color:#fff;padding:3px;">Cancelled</span>
                       </t>
                     </td>
                   </tr>
@@ -81,10 +79,10 @@
 
             <!-- Footer -->
             <div class="text-right mt-5">
-              <p>Дата друку: <t t-esc="now"/></p>
-              <p>Місто: <t t-esc="company.partner_id.city"/></p>
+              <p>Print date: <t t-esc="now"/></p>
+              <p>City: <t t-esc="company.partner_id.city"/></p>
             </div>
-          </div> <!-- /.page -->
+          </div>
         </t>
       </t>
     </t>
