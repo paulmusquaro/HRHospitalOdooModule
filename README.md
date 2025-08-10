@@ -13,7 +13,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[hr_hospital](hr_hospital/) | 17.0.1.0.0 | @paulmusquaro | Hospital & residency management
+[hr_hospital](hr_hospital/) | 17.0.1.0.0 | [@paulmusquaro](https://github.com/paulmusquaro) | Hospital & residency management
 crm_extras *(planned)* | — | — | CRM enhancements
 sales_tools *(planned)* | — | — | Sales workflow helpers
 backend_utils *(planned)* | — | — | Back-office utilities
