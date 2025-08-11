@@ -5,12 +5,12 @@
 
     <record id="disease_flu" model="hr.hospital.disease">
         <field name="name">Flu</field>
-        <field name="parent_id" ref="disease_infectious"/>
+        <field name="parent_id" ref="disease_infectious" />
     </record>
 
     <record id="disease_covid" model="hr.hospital.disease">
         <field name="name">COVID-19</field>
-        <field name="parent_id" ref="disease_infectious"/>
+        <field name="parent_id" ref="disease_infectious" />
     </record>
 
     <record id="disease_chronic" model="hr.hospital.disease">
@@ -19,11 +19,11 @@
 
     <record id="disease_diabetes" model="hr.hospital.disease">
         <field name="name">Diabetes</field>
-        <field name="parent_id" ref="disease_chronic"/>
+        <field name="parent_id" ref="disease_chronic" />
     </record>
 
     <record id="disease_hypertension" model="hr.hospital.disease">
         <field name="name">Hypertension</field>
-        <field name="parent_id" ref="disease_chronic"/>
+        <field name="parent_id" ref="disease_chronic" />
     </record>
 </odoo>

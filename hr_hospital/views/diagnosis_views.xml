@@ -4,10 +4,10 @@
         <field name="model">hr.hospital.diagnosis</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="disease_id"/>
-                <field name="doctor_id"/>
-                <field name="diagnosis_date"/>
-                <field name="approved"/>
+                <field name="disease_id" />
+                <field name="doctor_id" />
+                <field name="diagnosis_date" />
+                <field name="approved" />
             </tree>
         </field>
     </record>
@@ -17,8 +17,8 @@
         <field name="model">hr.hospital.diagnosis</field>
         <field name="arch" type="xml">
             <pivot string="Diagnosis Analysis" disable_linking="1">
-                <field name="disease_id" type="row"/>
-                <field name="diagnosis_date" interval="month" type="col"/>
+                <field name="disease_id" type="row" />
+                <field name="diagnosis_date" interval="month" type="col" />
             </pivot>
         </field>
     </record>
@@ -28,8 +28,8 @@
         <field name="model">hr.hospital.diagnosis</field>
         <field name="arch" type="xml">
             <graph string="Diagnosis Graph" type="bar">
-                <field name="disease_id" type="row"/>
-                <field name="diagnosis_date" interval="month" type="col"/>
+                <field name="disease_id" type="row" />
+                <field name="diagnosis_date" interval="month" type="col" />
             </graph>
         </field>
     </record>
@@ -39,9 +39,9 @@
         <field name="model">hr.hospital.diagnosis</field>
         <field name="arch" type="xml">
             <search string="Search Diagnoses">
-                <field name="disease_id"/>
-                <field name="doctor_id"/>
-                <field name="diagnosis_date"/>
+                <field name="disease_id" />
+                <field name="doctor_id" />
+                <field name="diagnosis_date" />
             </search>
         </field>
     </record>
@@ -50,6 +50,6 @@
         <field name="name">Diagnoses</field>
         <field name="res_model">hr.hospital.diagnosis</field>
         <field name="view_mode">pivot,graph</field>
-        <field name="search_view_id" ref="hr_hospital.view_diagnosis_search"/>
+        <field name="search_view_id" ref="hr_hospital.view_diagnosis_search" />
     </record>
 </odoo>

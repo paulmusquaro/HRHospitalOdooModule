@@ -1,5 +1,7 @@
-from odoo import models
 from datetime import datetime
+
+from odoo import models
+
 
 class ReportDoctorTemplate(models.AbstractModel):
     """
@@ -11,8 +13,9 @@ class ReportDoctorTemplate(models.AbstractModel):
 
     The model name must match the template's `report_xxx` declaration.
     """
-    _name = 'report.hr_hospital.report_doctor_template'
-    _description = 'Doctor Report'
+
+    _name = "report.hr_hospital.report_doctor_template"
+    _description = "Doctor Report"
 
     def _get_report_values(self, docids, data=None):
         """
@@ -25,19 +28,19 @@ class ReportDoctorTemplate(models.AbstractModel):
         Returns:
             dict: A dictionary with context values for rendering the report template.
         """
-        docs = self.env['hr.hospital.doctor'].browse(docids)
+        docs = self.env["hr.hospital.doctor"].browse(docids)
         latest_visits = {}
         for doctor in docs:
             for visit in doctor.visit_ids:
                 pid = str(visit.patient_id.id)
                 latest_visits[pid] = visit
         now = datetime.now()
-        formatted_now = now.strftime('%Y-%m-%d %H:%M')
+        formatted_now = now.strftime("%Y-%m-%d %H:%M")
         return {
-            'doc_ids': docids,
-            'doc_model': 'hr.hospital.doctor',
-            'docs': docs,
-            'latest_visits': latest_visits,
-            'company': self.env.company,
-            'now': formatted_now,
+            "doc_ids": docids,
+            "doc_model": "hr.hospital.doctor",
+            "docs": docs,
+            "latest_visits": latest_visits,
+            "company": self.env.company,
+            "now": formatted_now,
         }

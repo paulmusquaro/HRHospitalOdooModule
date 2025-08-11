@@ -1,90 +1,141 @@
 <odoo>
-  <template id="report_doctor_template">
-    <t t-call="web.html_container">
-      <t t-foreach="docs" t-as="doc">
-        <t t-call="web.external_layout">
-          <div class="page">
+    <template id="report_doctor_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header -->
+                        <div class="text-center">
+                            <img
+                                t-if="company.logo"
+                                t-att-src="'data:image/png;base64,%s' % company.logo"
+                                style="height:80px;"
+                                class="mb-2"
+                            />
+                            <h2 t-esc="company.name" />
+                            <p t-esc="company.partner_id.contact_address" />
+                            <p t-esc="company.phone" />
+                        </div>
 
-            <!-- Header -->
-            <div class="text-center">
-              <img t-if="company.logo"
-                   t-att-src="'data:image/png;base64,%s' % company.logo"
-                   style="height:80px;" class="mb-2"/>
-              <h2 t-esc="company.name"/>
-              <p t-esc="company.partner_id.contact_address"/>
-              <p t-esc="company.phone"/>
-            </div>
+                        <!-- Title -->
+                        <h3 class="mt-4 mb-2">Doctor's report</h3>
+                        <h4>
+                            <t t-esc="doc.name" />
+                            —
+                            <t t-esc="doc.specialty_id.name" />
+                        </h4>
 
-            <!-- Title -->
-            <h3 class="mt-4 mb-2">Doctor's report</h3>
-            <h4><t t-esc="doc.name"/> — <t t-esc="doc.specialty_id.name"/></h4>
-
-            <!-- Visit history -->
-            <h5 class="mt-4">Visit history (recent ones at the top)</h5>
-            <table class="table table-sm table-bordered">
-              <thead>
-                <tr><th>Patient</th><th>Status</th><th>Date</th></tr>
-              </thead>
-              <tbody>
-                <t t-foreach="
+                        <!-- Visit history -->
+                        <h5 class="mt-4">Visit history (recent ones at the top)</h5>
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t
+                                    t-foreach="
                      doc.visit_ids.sorted(
                        key=lambda x: x.planned_datetime or x.actual_datetime or ''
                      )[::-1]"
-                   t-as="visit">
-                  <tr>
-                    <td><t t-esc="visit.patient_id.name"/></td>
-                    <td><t t-esc="visit.status"/></td>
-                    <td>
-                      <t t-if="visit.actual_datetime"
-                         t-esc="visit.actual_datetime.strftime('%Y-%m-%d %H:%M')"/>
-                      <t t-elif="visit.planned_datetime"
-                         t-esc="visit.planned_datetime.strftime('%Y-%m-%d %H:%M')"/>
-                    </td>
-                  </tr>
-                </t>
-              </tbody>
-            </table>
+                                    t-as="visit"
+                                >
+                                    <tr>
+                                        <td>
+                                            <t t-esc="visit.patient_id.name" />
+                                        </td>
+                                        <td>
+                                            <t t-esc="visit.status" />
+                                        </td>
+                                        <td>
+                                            <t
+                                                t-if="visit.actual_datetime"
+                                                t-esc="visit.actual_datetime.strftime('%Y-%m-%d %H:%M')"
+                                            />
+                                            <t
+                                                t-elif="visit.planned_datetime"
+                                                t-esc="visit.planned_datetime.strftime('%Y-%m-%d %H:%M')"
+                                            />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
 
-            <!-- Patients -->
-            <h5 class="mt-4">Doctor's patients</h5>
-            <table class="table table-sm table-bordered">
-              <thead>
-                <tr>
-                  <th>Full name</th><th>Sex</th><th>Birth</th>
-                  <th>Phone</th><th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <t t-foreach="latest_visits.values()" t-as="visit">
-                  <tr>
-                    <td><t t-esc="visit.patient_id.name"/></td>
-                    <td><t t-esc="visit.patient_id.gender"/></td>
-                    <td><t t-esc="visit.patient_id.birth_date.strftime('%Y-%m-%d')"/></td>
-                    <td><t t-esc="visit.patient_id.phone"/></td>
-                    <td>
-                      <t t-if="visit.status == 'planned'">
-                        <span style="background:yellow;padding:3px;">Scheduled</span>
-                      </t>
-                      <t t-elif="visit.status == 'done'">
-                        <span style="background:lightgreen;padding:3px;">Completed</span>
-                      </t>
-                      <t t-elif="visit.status == 'cancelled'">
-                        <span style="background:red;color:#fff;padding:3px;">Cancelled</span>
-                      </t>
-                    </td>
-                  </tr>
-                </t>
-              </tbody>
-            </table>
+                        <!-- Patients -->
+                        <h5 class="mt-4">Doctor's patients</h5>
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Full name</th>
+                                    <th>Sex</th>
+                                    <th>Birth</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="latest_visits.values()" t-as="visit">
+                                    <tr>
+                                        <td>
+                                            <t t-esc="visit.patient_id.name" />
+                                        </td>
+                                        <td>
+                                            <t t-esc="visit.patient_id.gender" />
+                                        </td>
+                                        <td>
+                                            <t
+                                                t-esc="visit.patient_id.birth_date.strftime('%Y-%m-%d')"
+                                            />
+                                        </td>
+                                        <td>
+                                            <t t-esc="visit.patient_id.phone" />
+                                        </td>
+                                        <td>
+                                            <t t-if="visit.status == 'planned'">
+                                                <span
+                                                    style="background:yellow;padding:3px;"
+                                                >
+                                                    Scheduled
+                                                </span>
+                                            </t>
+                                            <t t-elif="visit.status == 'done'">
+                                                <span
+                                                    style="background:lightgreen;padding:3px;"
+                                                >
+                                                    Completed
+                                                </span>
+                                            </t>
+                                            <t t-elif="visit.status == 'cancelled'">
+                                                <span
+                                                    style="background:red;color:#fff;padding:3px;"
+                                                >
+                                                    Cancelled
+                                                </span>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
 
-            <!-- Footer -->
-            <div class="text-right mt-5">
-              <p>Print date: <t t-esc="now"/></p>
-              <p>City: <t t-esc="company.partner_id.city"/></p>
-            </div>
-          </div>
+                        <!-- Footer -->
+                        <div class="text-right mt-5">
+                            <p>
+                                Print date:
+                                <t t-esc="now" />
+                            </p>
+                            <p>
+                                City:
+                                <t t-esc="company.partner_id.city" />
+                            </p>
+                        </div>
+                    </div>
+                </t>
+            </t>
         </t>
-      </t>
-    </t>
-  </template>
+    </template>
 </odoo>

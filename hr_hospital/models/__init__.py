@@ -1,1 +1,1 @@
-from . import person, specialty, doctor, patient, disease, diagnosis, visit
+from . import diagnosis, disease, doctor, patient, person, specialty, visit

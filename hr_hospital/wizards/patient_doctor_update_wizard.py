@@ -8,11 +8,12 @@ class PatientDoctorUpdateWizard(models.TransientModel):
     Used by hospital administrators or staff to assign or reassign multiple
     patients to a new doctor in a single operation.
     """
-    _name = 'hr.hospital.patient.doctor.wizard'
-    _description = 'Bulk update personal doctor'
 
-    doctor_id = fields.Many2one('hr.hospital.doctor', required=True)
-    patient_ids = fields.Many2many('hr.hospital.patient')
+    _name = "hr.hospital.patient.doctor.wizard"
+    _description = "Bulk update personal doctor"
+
+    doctor_id = fields.Many2one("hr.hospital.doctor", required=True)
+    patient_ids = fields.Many2many("hr.hospital.patient")
 
     def action_update_doctor(self):
         """

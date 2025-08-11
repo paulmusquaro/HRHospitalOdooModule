@@ -4,10 +4,10 @@
         <field name="model">hr.hospital.patient</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="first_name"/>
-                <field name="last_name"/>
-                <field name="birth_date"/>
-                <field name="personal_doctor_id"/>
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="birth_date" />
+                <field name="personal_doctor_id" />
             </tree>
         </field>
     </record>
@@ -18,34 +18,38 @@
         <field name="arch" type="xml">
             <form string="Patient">
                 <header>
-                    <button name="action_open_visits"
-                            string="Show Visits"
-                            type="object"
-                            class="oe_highlight"/>
-                    <button name="action_create_visit"
-                            string="Create Visit"
-                            type="object"
-                            class="btn-primary"/>
+                    <button
+                        name="action_open_visits"
+                        string="Show Visits"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="action_create_visit"
+                        string="Create Visit"
+                        type="object"
+                        class="btn-primary"
+                    />
                 </header>
                 <sheet>
                     <group>
-                        <field name="first_name"/>
-                        <field name="last_name"/>
-                        <field name="name" readonly="1"/>
-                        <field name="birth_date"/>
-                        <field name="age" readonly="1"/>
-                        <field name="passport_data"/>
-                        <field name="contact_person"/>
-                        <field name="personal_doctor_id"/>
+                        <field name="first_name" />
+                        <field name="last_name" />
+                        <field name="name" readonly="1" />
+                        <field name="birth_date" />
+                        <field name="age" readonly="1" />
+                        <field name="passport_data" />
+                        <field name="contact_person" />
+                        <field name="personal_doctor_id" />
                     </group>
                     <notebook>
                         <page string="Diagnosis History">
                             <field name="diagnosis_ids">
                                 <tree>
-                                    <field name="disease_id"/>
-                                    <field name="doctor_id"/>
-                                    <field name="diagnosis_date"/>
-                                    <field name="notes"/>
+                                    <field name="disease_id" />
+                                    <field name="doctor_id" />
+                                    <field name="diagnosis_date" />
+                                    <field name="notes" />
                                 </tree>
                             </field>
                         </page>
@@ -60,8 +64,8 @@
         <field name="model">hr.hospital.patient</field>
         <field name="arch" type="xml">
             <search string="Search Patients">
-                <field name="name" string="Name"/>
-                <field name="phone" string="Phone"/>
+                <field name="name" string="Name" />
+                <field name="phone" string="Phone" />
             </search>
         </field>
     </record>
@@ -70,10 +74,13 @@
         <field name="name">Patients</field>
         <field name="res_model">hr.hospital.patient</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="hr_hospital.view_patient_search"/>
+        <field name="search_view_id" ref="hr_hospital.view_patient_search" />
     </record>
 
-    <menuitem id="menu_patient_list" name="All Patients"
-              parent="hr_hospital_menu_patient"
-              action="action_patient"/>
+    <menuitem
+        id="menu_patient_list"
+        name="All Patients"
+        parent="hr_hospital_menu_patient"
+        action="action_patient"
+    />
 </odoo>

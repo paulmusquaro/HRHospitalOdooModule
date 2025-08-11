@@ -1,48 +1,52 @@
 <odoo>
     <!-- Diagnosis 1: Flu -->
     <record id="diagnosis_1" model="hr.hospital.diagnosis">
-        <field name="visit_id" ref="hr_hospital.visit_sydorenko_petrenko"/>
-        <field name="disease_id" ref="hr_hospital.disease_flu"/>
+        <field name="visit_id" ref="hr_hospital.visit_sydorenko_petrenko" />
+        <field name="disease_id" ref="hr_hospital.disease_flu" />
         <field name="description">Symptomatic treatment was applied.</field>
         <field name="approved">1</field>
     </record>
 
     <!-- Diagnosis 2: COVID-19 -->
     <record id="diagnosis_2" model="hr.hospital.diagnosis">
-        <field name="visit_id" ref="hr_hospital.visit_sydorenko_petrenko"/>
-        <field name="disease_id" ref="hr_hospital.disease_covid"/>
-        <field name="description">The patient is in satisfactory condition, without complications.</field>
+        <field name="visit_id" ref="hr_hospital.visit_sydorenko_petrenko" />
+        <field name="disease_id" ref="hr_hospital.disease_covid" />
+        <field name="description">
+            The patient is in satisfactory condition, without complications.
+        </field>
         <field name="approved">1</field>
     </record>
 
     <!-- Diagnosis 3: Hypertension -->
     <record id="diagnosis_3" model="hr.hospital.diagnosis">
-        <field name="visit_id" ref="hr_hospital.visit_bila_karpenko"/>
-        <field name="disease_id" ref="hr_hospital.disease_hypertension"/>
-        <field name="description">Blood pressure monitoring and diet are recommended.</field>
+        <field name="visit_id" ref="hr_hospital.visit_bila_karpenko" />
+        <field name="disease_id" ref="hr_hospital.disease_hypertension" />
+        <field name="description">
+            Blood pressure monitoring and diet are recommended.
+        </field>
         <field name="approved">1</field>
     </record>
 
     <!-- Diagnosis 4: Diabetes -->
     <record id="diagnosis_4" model="hr.hospital.diagnosis">
-        <field name="visit_id" ref="hr_hospital.visit_bila_karpenko"/>
-        <field name="disease_id" ref="hr_hospital.disease_diabetes"/>
+        <field name="visit_id" ref="hr_hospital.visit_bila_karpenko" />
+        <field name="disease_id" ref="hr_hospital.disease_diabetes" />
         <field name="description">Short-acting insulin was prescribed.</field>
         <field name="approved">1</field>
     </record>
 
     <!-- Diagnosis 5: Flu -->
     <record id="diagnosis_5" model="hr.hospital.diagnosis">
-        <field name="visit_id" ref="hr_hospital.visit_pavlenko_petrenko"/>
-        <field name="disease_id" ref="hr_hospital.disease_flu"/>
+        <field name="visit_id" ref="hr_hospital.visit_pavlenko_petrenko" />
+        <field name="disease_id" ref="hr_hospital.disease_flu" />
         <field name="description">Complaints of fatigue, without fever.</field>
         <field name="approved">1</field>
     </record>
 
     <!-- Diagnosis 6: COVID-19 -->
     <record id="diagnosis_6" model="hr.hospital.diagnosis">
-        <field name="visit_id" ref="hr_hospital.visit_pavlenko_petrenko"/>
-        <field name="disease_id" ref="hr_hospital.disease_covid"/>
+        <field name="visit_id" ref="hr_hospital.visit_pavlenko_petrenko" />
+        <field name="disease_id" ref="hr_hospital.disease_covid" />
         <field name="description">Mild form, home care.</field>
         <field name="approved">1</field>
     </record>

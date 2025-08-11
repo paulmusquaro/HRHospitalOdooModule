@@ -4,9 +4,9 @@
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="first_name"/>
-                <field name="last_name"/>
-                <field name="specialty_id"/>
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="specialty_id" />
             </tree>
         </field>
     </record>
@@ -17,28 +17,41 @@
         <field name="arch" type="xml">
             <form string="Doctor">
                 <header>
-                    <button name="%(hr_hospital.action_doctor_report)d"
-                            string="Print report"
-                            type="action"
-                            class="btn btn-secondary"/>
+                    <button
+                        name="%(hr_hospital.action_doctor_report)d"
+                        string="Print report"
+                        type="action"
+                        class="btn btn-secondary"
+                    />
                 </header>
                 <sheet>
                     <group>
-                        <field name="first_name"/>
-                        <field name="last_name"/>
-                        <field name="specialty_id"/>
-                        <field name="is_intern"/>
-                        <field name="mentor_id"/>
+                        <field name="first_name" />
+                        <field name="last_name" />
+                        <field name="specialty_id" />
+                        <field name="is_intern" />
+                        <field name="mentor_id" />
                     </group>
 
                     <group string="Interns">
-                        <field name="intern_ids" modifiers="{'invisible': [('is_intern', '=', True)]}">
+                        <field
+                            name="intern_ids"
+                            modifiers="{'invisible': [('is_intern', '=', True)]}"
+                        >
                             <kanban>
                                 <templates>
                                     <t t-name="kanban-box">
-                                        <div class="oe_kanban_global_click o_kanban_record">
-                                            <strong><field name="first_name"/> <field name="last_name"/></strong><br/>
-                                            <span><field name="specialty_id"/></span>
+                                        <div
+                                            class="oe_kanban_global_click o_kanban_record"
+                                        >
+                                            <strong>
+                                                <field name="first_name" />
+                                                <field name="last_name" />
+                                            </strong>
+                                            <br />
+                                            <span>
+                                                <field name="specialty_id" />
+                                            </span>
                                         </div>
                                     </t>
                                 </templates>
@@ -55,11 +68,19 @@
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <search string="Search Doctors">
-                <field name="first_name"/>
-                <field name="last_name"/>
-                <field name="specialty_id"/>
-                <filter string="Mentors" name="filter_mentors" domain="[('is_intern', '=', False)]"/>
-                <filter string="Interns" name="filter_interns" domain="[('is_intern', '=', True)]"/>
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="specialty_id" />
+                <filter
+                    string="Mentors"
+                    name="filter_mentors"
+                    domain="[('is_intern', '=', False)]"
+                />
+                <filter
+                    string="Interns"
+                    name="filter_interns"
+                    domain="[('is_intern', '=', True)]"
+                />
             </search>
         </field>
     </record>
@@ -69,60 +90,79 @@
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <kanban default_group_by="specialty_id" class="o_hospital_doctor_kanban">
-                <field name="id"/>
-                <field name="first_name"/>
-                <field name="last_name"/>
-                <field name="specialty_id"/>
-                <field name="intern_ids"/>
-                <field name="is_intern"/>
-                <field name="interns_names"/>
+                <field name="id" />
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="specialty_id" />
+                <field name="intern_ids" />
+                <field name="is_intern" />
+                <field name="interns_names" />
 
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click o_kanban_record p-1 position-relative">
-
+                        <div
+                            class="oe_kanban_global_click o_kanban_record p-1 position-relative"
+                        >
                             <div class="o_kanban_manage_dropdown">
-                                <a class="o_dropdown_toggler btn btn-sm"
-                                   data-bs-toggle="dropdown" role="button"
-                                   aria-label="Actions">
-                                    <i class="fa fa-bars"/>
+                                <a
+                                    class="o_dropdown_toggler btn btn-sm"
+                                    data-bs-toggle="dropdown"
+                                    role="button"
+                                    aria-label="Actions"
+                                >
+                                    <i class="fa fa-bars" />
                                 </a>
                                 <div class="dropdown-menu" role="menu">
-                                    <a type="edit"
-                                       class="dropdown-item oe_kanban_action oe_kanban_action_a">
-                                        <i class="fa fa-pencil me-1"/> Edit
+                                    <a
+                                        type="edit"
+                                        class="dropdown-item oe_kanban_action oe_kanban_action_a"
+                                    >
+                                        <i class="fa fa-pencil me-1" />
+                                        Edit
                                     </a>
-                                    <a type="delete"
-                                       class="dropdown-item oe_kanban_action oe_kanban_action_a">
-                                        <i class="fa fa-trash me-1"/> Delete
+                                    <a
+                                        type="delete"
+                                        class="dropdown-item oe_kanban_action oe_kanban_action_a"
+                                    >
+                                        <i class="fa fa-trash me-1" />
+                                        Delete
                                     </a>
                                 </div>
                             </div>
 
                             <strong>
-                                <field name="first_name"/> <field name="last_name"/>
-                            </strong><br/>
+                                <field name="first_name" />
+                                <field name="last_name" />
+                            </strong>
+                            <br />
                             <small class="text-muted">
-                                <field name="specialty_id"/>
+                                <field name="specialty_id" />
                             </small>
 
-                            <t t-if="record.interns_names.raw_value &amp;&amp; ! record.is_intern.raw_value">
-                                <hr class="mt-1 mb-1"/>
+                            <t
+                                t-if="record.interns_names.raw_value &amp;&amp; ! record.is_intern.raw_value"
+                            >
+                                <hr class="mt-1 mb-1" />
                                 <ul class="list-unstyled mb-0">
-                                    <t t-foreach="record.interns_names.raw_value.split(',')" t-as="intern_name">
+                                    <t
+                                        t-foreach="record.interns_names.raw_value.split(',')"
+                                        t-as="intern_name"
+                                    >
                                         <li>
-                                            <i class="fa fa-user text-secondary me-1"></i>
-                                            <t t-esc="intern_name.trim()"/>
+                                            <i class="fa fa-user text-secondary me-1" />
+                                            <t t-esc="intern_name.trim()" />
                                         </li>
                                     </t>
                                 </ul>
                             </t>
 
                             <div class="o_kanban_buttons mt-2">
-                                <button type="action"
-                                        name="%(hr_hospital.action_visit_quick_create)d"
-                                        context="{'default_doctor_id': id}"
-                                        class="btn btn-primary btn-sm">
+                                <button
+                                    type="action"
+                                    name="%(hr_hospital.action_visit_quick_create)d"
+                                    context="{'default_doctor_id': id}"
+                                    class="btn btn-primary btn-sm"
+                                >
                                     Record a patient
                                 </button>
                             </div>
@@ -137,20 +177,23 @@
     <record id="view_doctor_form_inherit_buttons" model="ir.ui.view">
         <field name="name">hr.hospital.doctor.form.inherit.buttons</field>
         <field name="model">hr.hospital.doctor</field>
-        <field name="inherit_id" ref="hr_hospital.view_doctor_form"/>
+        <field name="inherit_id" ref="hr_hospital.view_doctor_form" />
         <field name="arch" type="xml">
             <xpath expr="//sheet/group[last()]" position="after">
-                <button name="%(hr_hospital.action_diagnosis_report_wizard)d"
-                        type="action" string="Diagnosis Report"
-                        class="btn btn-primary"/>
+                <button
+                    name="%(hr_hospital.action_diagnosis_report_wizard)d"
+                    type="action"
+                    string="Diagnosis Report"
+                    class="btn btn-primary"
+                />
             </xpath>
         </field>
     </record>
 
     <record id="action_diagnosis_report_from_list" model="ir.actions.server">
         <field name="name">Open Diagnosis Report Wizard</field>
-        <field name="model_id" ref="hr_hospital.model_hr_hospital_doctor"/>
-        <field name="binding_model_id" ref="hr_hospital.model_hr_hospital_doctor"/>
+        <field name="model_id" ref="hr_hospital.model_hr_hospital_doctor" />
+        <field name="binding_model_id" ref="hr_hospital.model_hr_hospital_doctor" />
         <field name="binding_view_types">form,list</field>
         <field name="state">code</field>
         <field name="code">
@@ -167,10 +210,13 @@
         <field name="name">Doctors</field>
         <field name="res_model">hr.hospital.doctor</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="search_view_id" ref="hr_hospital.view_doctor_search"/>
+        <field name="search_view_id" ref="hr_hospital.view_doctor_search" />
     </record>
 
-    <menuitem id="menu_doctor_list" name="All Doctors"
-              parent="hr_hospital_menu_doctor"
-              action="action_doctor"/>
+    <menuitem
+        id="menu_doctor_list"
+        name="All Doctors"
+        parent="hr_hospital_menu_doctor"
+        action="action_doctor"
+    />
 </odoo>

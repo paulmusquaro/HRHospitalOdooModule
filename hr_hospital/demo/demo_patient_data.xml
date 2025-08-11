@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="patient_sydorenko" model="hr.hospital.patient">
         <field name="first_name">Sergey</field>
         <field name="last_name">Sydorenko</field>
         <field name="birth_date">1990-04-12</field>
-        <field name="personal_doctor_id" ref="doctor_petrenko"/>
+        <field name="personal_doctor_id" ref="doctor_petrenko" />
     </record>
 
     <record id="patient_olena" model="hr.hospital.patient">
         <field name="first_name">Olena</field>
         <field name="last_name">Bila</field>
         <field name="birth_date">1985-07-29</field>
-        <field name="personal_doctor_id" ref="doctor_karpenko"/>
+        <field name="personal_doctor_id" ref="doctor_karpenko" />
     </record>
 
     <record id="patient_andrii" model="hr.hospital.patient">
         <field name="first_name">Andriy</field>
         <field name="last_name">Pavlenko</field>
         <field name="birth_date">2001-11-03</field>
-        <field name="personal_doctor_id" ref="doctor_petrenko"/>
+        <field name="personal_doctor_id" ref="doctor_petrenko" />
     </record>
 
     <record id="patient_koval" model="hr.hospital.patient">
         <field name="first_name">Khmara</field>
         <field name="last_name">Koval</field>
         <field name="birth_date">2000-11-04</field>
-        <field name="personal_doctor_id" ref="doctor_karpenko"/>
+        <field name="personal_doctor_id" ref="doctor_karpenko" />
     </record>
 </odoo>

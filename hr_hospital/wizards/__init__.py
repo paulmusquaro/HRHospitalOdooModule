@@ -1,1 +1,1 @@
-from . import patient_doctor_update_wizard, diagnosis_report_wizard
+from . import diagnosis_report_wizard, patient_doctor_update_wizard

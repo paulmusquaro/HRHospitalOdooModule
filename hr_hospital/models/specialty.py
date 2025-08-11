@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import fields, models
 
 
 class Specialty(models.Model):
@@ -11,7 +11,8 @@ class Specialty(models.Model):
 
     This model allows for categorizing doctors by their field of medical expertise.
     """
-    _name = 'hr.hospital.specialty'
-    _description = 'Medical Specialty'
+
+    _name = "hr.hospital.specialty"
+    _description = "Medical Specialty"
 
     name = fields.Char(string="Name", required=True, translate=True)

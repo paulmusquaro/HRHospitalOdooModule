@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -12,20 +12,38 @@ class Diagnosis(models.Model):
 
     Fields like doctor, patient, and visit date are inherited from the related visit for consistency.
     """
-    _name = 'hr.hospital.diagnosis'
-    _description = 'Diagnosis'
 
-    visit_id = fields.Many2one('hr.hospital.visit', string="Visit", required=True)
-    disease_id = fields.Many2one('hr.hospital.disease', string="Disease", required=True)
+    _name = "hr.hospital.diagnosis"
+    _description = "Diagnosis"
+
+    visit_id = fields.Many2one("hr.hospital.visit", string="Visit", required=True)
+    disease_id = fields.Many2one("hr.hospital.disease", string="Disease", required=True)
     description = fields.Text(string="Treatment Notes")
     approved = fields.Boolean(string="Approved by Mentor")
-    patient_id_related = fields.Many2one('hr.hospital.patient', string='Patient (Related)', compute='_compute_patient', store=True)
-    doctor_id = fields.Many2one('hr.hospital.doctor', string="Doctor", related='visit_id.doctor_id', store=True, readonly=True)
-    diagnosis_date = fields.Datetime(string="Diagnosis Date", related='visit_id.actual_datetime', store=True, readonly=True)
-    notes = fields.Text(string='Visit Notes', related='visit_id.notes', store=True, readonly=True)
+    patient_id_related = fields.Many2one(
+        "hr.hospital.patient",
+        string="Patient (Related)",
+        compute="_compute_patient",
+        store=True,
+    )
+    doctor_id = fields.Many2one(
+        "hr.hospital.doctor",
+        string="Doctor",
+        related="visit_id.doctor_id",
+        store=True,
+        readonly=True,
+    )
+    diagnosis_date = fields.Datetime(
+        string="Diagnosis Date",
+        related="visit_id.actual_datetime",
+        store=True,
+        readonly=True,
+    )
+    notes = fields.Text(
+        string="Visit Notes", related="visit_id.notes", store=True, readonly=True
+    )
 
-
-    @api.depends('visit_id.patient_id')
+    @api.depends("visit_id.patient_id")
     def _compute_patient(self):
         """
         Compute the related patient based on the selected visit.
@@ -36,7 +54,7 @@ class Diagnosis(models.Model):
         for rec in self:
             rec.patient_id_related = rec.visit_id.patient_id
 
-    @api.constrains('approved')
+    @api.constrains("approved")
     def _check_approval_rights(self):
         """
         Ensure mentor approval is provided for diagnoses created by interns.
@@ -47,4 +65,6 @@ class Diagnosis(models.Model):
         """
         for rec in self:
             if rec.visit_id.doctor_id.is_intern and not rec.approved:
-                raise ValidationError("Diagnosis by intern must be approved by mentor.")
+                raise ValidationError(
+                    _("Diagnosis by intern must be approved by mentor.")
+                )

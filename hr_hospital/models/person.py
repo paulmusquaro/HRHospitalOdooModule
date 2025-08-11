@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import fields, models
+
 
 class Person(models.AbstractModel):
     """
@@ -11,16 +12,19 @@ class Person(models.AbstractModel):
     Note:
         As an abstract model (`_name`, not `_inherit`), no table is created in the database.
     """
-    _name = 'hr.hospital.person'
-    _description = 'Abstract Person Model'
+
+    _name = "hr.hospital.person"
+    _description = "Abstract Person Model"
 
     first_name = fields.Char(string="First Name", required=True)
     last_name = fields.Char(string="Last Name", required=True)
     phone = fields.Char(string="Phone")
     photo = fields.Image(string="Photo")
-    gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender")
+    gender = fields.Selection([("male", "Male"), ("female", "Female")], string="Gender")
     user_id = fields.Many2one(
-        'res.users', string="Related User",
-        ondelete='set null', index=True,
+        "res.users",
+        string="Related User",
+        ondelete="set null",
+        index=True,
         help="The Odoo user that represents this person",
     )
